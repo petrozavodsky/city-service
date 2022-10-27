@@ -1,0 +1,53 @@
+###
+
+//получение города
+GET http://localhost:8080/city/490
+Accept: application/json
+
+###
+
+//Создание города
+POST http://localhost:8080/city
+Content-Type: application/json
+
+{
+  "name": "город",
+  "region": "гродовск",
+  "district": "районовск",
+  "population": 999888,
+  "year": 1999
+}
+
+###
+
+// Получение городов по району
+GET http://localhost:8080/cities-by-district/Южный
+Accept: application/json
+
+###
+
+// Получение городов по региону
+GET http://localhost:8080/cities-by-region/Самарская область
+Accept: application/json
+
+###
+
+// Получение городов по числлености населения
+GET http://localhost:8080/cities-by-population?from=744933&to=889989
+Accept: application/json
+
+###
+
+// Получение городов по годам
+GET http://localhost:8080/cities-by-foundation?from=1723&to=1739
+Accept: application/json
+
+###
+
+// Обновление числлености населения
+PUT http://localhost:8080/city/159
+Content-Type: application/json
+
+{
+  "population": 889988
+}
