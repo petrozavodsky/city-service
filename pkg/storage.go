@@ -2,10 +2,12 @@ package city
 
 import (
 	"sort"
+	"sync"
 )
 
 // Storage - хранилище городов
 type Storage struct {
+	Mtx             *sync.Mutex
 	Ids             []int
 	Store           map[int]*City
 	RegionIndex     map[string][]*City
@@ -17,6 +19,7 @@ type Storage struct {
 // MakeStorage - создает экземпляр хранилище
 func MakeStorage() *Storage {
 	return &Storage{
+		new(sync.Mutex),
 		make([]int, 0, 0),
 		make(map[int]*City),
 		make(map[string][]*City),

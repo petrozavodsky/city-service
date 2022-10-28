@@ -16,7 +16,12 @@ func AddCity(storage *city.Storage) http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 
+		//открываем мьютекс
+		storage.Mtx.Lock()
+
 		defer func(Body io.ReadCloser) {
+			//открываем мьютекс
+			storage.Mtx.Unlock()
 
 			err := Body.Close()
 			if err != nil {
@@ -94,7 +99,13 @@ func DeleteCity(storage *city.Storage) http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 
+		//открываем мьютекс
+		storage.Mtx.Lock()
+
 		defer func(Body io.ReadCloser) {
+
+			//закрываем мьютекс
+			storage.Mtx.Unlock()
 
 			err := Body.Close()
 			if err != nil {
@@ -134,7 +145,13 @@ func UpdatePopulation(storage *city.Storage) http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 
+		//открываем мьютекс
+		storage.Mtx.Lock()
+
 		defer func(Body io.ReadCloser) {
+
+			//закрываем мьютекс
+			storage.Mtx.Unlock()
 
 			err := Body.Close()
 			if err != nil {
