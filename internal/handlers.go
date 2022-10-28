@@ -17,11 +17,14 @@ func AddCity(storage *city.Storage) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		defer func(Body io.ReadCloser) {
+
 			err := Body.Close()
 			if err != nil {
 				log.Fatalln(err)
 			}
 		}(r.Body)
+
+		w.Header().Set("Content-Type", "application/json")
 
 		requestCity := city.City{}
 		if err := json.NewDecoder(r.Body).Decode(&requestCity); err != nil {
@@ -92,11 +95,14 @@ func DeleteCity(storage *city.Storage) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		defer func(Body io.ReadCloser) {
+
 			err := Body.Close()
 			if err != nil {
 				log.Fatalln(err)
 			}
 		}(r.Body)
+
+		w.Header().Set("Content-Type", "application/json")
 
 		request := map[string]string{}
 		if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
@@ -129,11 +135,14 @@ func UpdatePopulation(storage *city.Storage) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		defer func(Body io.ReadCloser) {
+
 			err := Body.Close()
 			if err != nil {
 				log.Fatalln(err)
 			}
 		}(r.Body)
+
+		w.Header().Set("Content-Type", "application/json")
 
 		idStr := chi.URLParam(r, "id")
 
